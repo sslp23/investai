@@ -11,8 +11,6 @@ def recomendation (wallet):
     #Evaluate Metrics
     (df, composition, weights) = create_portfolio(wallet)
     portfolio = {'stocks': composition,'metrics':[sma(df)[0], sma(df)[1], rsi(df), var_historic(df)]}
-    #
-    portfolio = {'stocks': [], 'metrics': [0.165088, 0.141263,0.579272,0.109797]}
     #Recomendation
     recomendation = recomend(portfolio, 12)
     #Weights Correction
@@ -175,4 +173,4 @@ def carteirasIniciais():
 
     return [conservador, moderado,agressivo]
 
-print(carteirasIniciais())
+print(recomendation(['HGTX3', 'CSNA3', 'BRFS3', 'GOAU4']))
