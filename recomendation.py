@@ -172,5 +172,3 @@ def carteirasIniciais():
     agressivo = filterByRelevance(recomendation,markowitz(recomendation))
 
     return [conservador, moderado,agressivo]
-
-print(recomendation(['HGTX3', 'CSNA3', 'BRFS3', 'GOAU4']))
