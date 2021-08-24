@@ -173,4 +173,6 @@ def carteirasIniciais():
     recomendation = recomend(portfolio, 12)
     agressivo = filterByRelevance(recomendation,markowitz(recomendation))
 
-    return ('Conservador:' + conservador + 'Moderado:' + moderado + 'Agressivo:' + agressivo)
+    return [conservador, moderado,agressivo]
+
+print(carteirasIniciais())
