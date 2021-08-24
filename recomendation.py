@@ -11,6 +11,8 @@ def recomendation (wallet):
     #Evaluate Metrics
     (df, composition, weights) = create_portfolio(wallet)
     portfolio = {'stocks': composition,'metrics':[sma(df)[0], sma(df)[1], rsi(df), var_historic(df)]}
+    #
+    portfolio = {'stocks': [], 'metrics': [0.165088, 0.141263,0.579272,0.109797]}
     #Recomendation
     recomendation = recomend(portfolio, 12)
     #Weights Correction
@@ -155,3 +157,20 @@ def markowitz (recs):
     opts = sco.minimize(min_func_sharpe, eweights, args=(rets), method='SLSQP', bounds=bnds, constraints=cons)
     weights = opts['x'].round(3) #pesos do portfolio ótimo
     return weights
+
+
+def carteirasIniciais():
+    #Conservador
+    portfolio = {'stocks': [], 'metrics': [0.165088, 0.141263,0.579272,0.109797]}
+    recomendation = recomend(portfolio, 12)
+    conservador = filterByRelevance(recomendation,markowitz(recomendation))
+    #Moderado
+    portfolio = {'stocks': [], 'metrics': [0.355448, 0.352572,0.590861, 0.266363]}
+    recomendation = recomend(portfolio, 12)
+    moderado = filterByRelevance(recomendation,markowitz(recomendation))
+    #Agressivo
+    portfolio = {'stocks': [], 'metrics': [0.528430, 0.536915, 0.514488,  0.488956]}
+    recomendation = recomend(portfolio, 12)
+    agressivo = filterByRelevance(recomendation,markowitz(recomendation))
+
+    return ('Conservador:' + conservador + 'Moderado:' + moderado + 'Agressivo:' + agressivo)
